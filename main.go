@@ -45,7 +45,8 @@ func main(){
 }
 func SendLineMsgHandler(w http.ResponseWriter, r *http.Request) {
 	//Parse HttpRequest
-	events, err := bot.ParseRequest(r)  
+	events, err := bot.ParseRequest(r)
+	log.Println("Events:", events, " err:", err)  
 	if err != nil {
 		if err == linebot.ErrInvalidSignature {
 			w.WriteHeader(400)
@@ -60,6 +61,8 @@ func SendLineMsgHandler(w http.ResponseWriter, r *http.Request) {
 	}else {
 		for _, event := range events 	{
 			if event.Type == linebot.EventTypeMessage {
+				log.Println("Your Line User ID: \n  " + event.Source.UserID + "\n")
+				log.Println("Your Line Group ID: \n  " + event.Source.GroupID + "\n")
 				userid := "Your Line User ID: \n  " + event.Source.UserID + "\n"
 				groupid := "Your Line Group ID: \n  " + event.Source.GroupID + "\n"
 				switch message := event.Message.(type) {
