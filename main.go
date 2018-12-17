@@ -43,7 +43,7 @@ func main(){
 	addr := fmt.Sprintf(":%s", port)
 	http.ListenAndServe(addr, nil)	
 }
-func SendLineMsgHandler (w http.ResponseWriter, r *http.Request) {
+func SendLineMsgHandler(w http.ResponseWriter, r *http.Request) {
 	//Parse HttpRequest
 	events, err := bot.ParseRequest(r)  
 	if err != nil {
